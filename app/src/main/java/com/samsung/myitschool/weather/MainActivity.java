@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
@@ -64,7 +66,10 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-            tv.setText(s);
+            Gson g = new Gson();
+            Weather w = g.fromJson(s,Weather.class);
+            //w.getCurrent().getFeelslike();
+            tv.setText(Integer.toString(w.getCurrent().getTemperature()));
         }
     }
 }
